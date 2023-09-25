@@ -1,4 +1,4 @@
-import { emptyItem } from '@/atoms/select/select'
+import { emptyItem } from '../../atoms/select/select'
 import { SchedulerInitialStateInterface } from './scheduler-interface'
 
 export const schedulerInitialState: SchedulerInitialStateInterface = {
@@ -8,7 +8,6 @@ export const schedulerInitialState: SchedulerInitialStateInterface = {
     lastName: '',
     region: '',
     location: '',
-    generations: [],
     pokemons: [emptyItem, emptyItem],
     scheduleDate: '',
     scheduleTime: '',

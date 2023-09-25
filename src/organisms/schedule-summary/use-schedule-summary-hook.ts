@@ -1,7 +1,8 @@
-import { SchedulerActions } from '@/store/scheduler/scheduler-reducer'
-import { RootState, useAppDispatch, useAppSelector } from '@/store/store-config'
-import { countValidItems } from '@/utils/count-valid-items'
-import { formatTime } from '@/utils/format-time'
+import { calculateTax } from '../../utils/calculate-tax'
+import { SchedulerActions } from '../../store/scheduler/scheduler-reducer'
+import { RootState, useAppDispatch, useAppSelector } from '../../store/store-config'
+import { countValidItems } from '../../utils/count-valid-items'
+import { formatTime } from '../../utils/format-time'
 import { useEffect, useState } from 'react'
 
 const useScheduleSummary = () => {
@@ -10,8 +11,6 @@ const useScheduleSummary = () => {
   const current = useAppSelector((state: RootState) => state.scheduler.current)
   const amountPokemons = useAppSelector((state: RootState) => countValidItems(state.scheduler.current.pokemons))
 
-  const tax = 0.03
-  const limitTax = tax * 10
   const unityValue = 70
 
   const [subTotal, setSubTotal] = useState<number>(0)
@@ -33,11 +32,6 @@ const useScheduleSummary = () => {
       return false
     }
     return true
-  }
-
-  const calcMaxGeneration = () => {
-    const generations = current.pokemons.map((item) => item.generation || 0)
-    setMaxGeneration(Math.max(...generations))
   }
 
   const handleSubmit = () => {
@@ -72,16 +66,17 @@ const useScheduleSummary = () => {
   }, [current.pokemons])
 
   useEffect(() => {
-    setTaxGeneration(maxGeneration * tax <= 0.3 ? maxGeneration * tax * subTotal : limitTax * subTotal)
-  }, [maxGeneration, limitTax, tax, subTotal])
+    setSubTotal(unityValue * amountPokemons)
+  }, [amountPokemons])
+
+  useEffect(() => {
+    setTaxGeneration(calculateTax(maxGeneration, subTotal))
+  }, [maxGeneration, subTotal])
 
   useEffect(() => {
     setTotal(taxGeneration + subTotal)
-  }, [taxGeneration, subTotal])
-
-  useEffect(() => {
-    setSubTotal(unityValue * amountPokemons)
-  }, [unityValue, amountPokemons])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [taxGeneration + subTotal])
 
   return {
     amountPokemons,
@@ -90,6 +85,7 @@ const useScheduleSummary = () => {
     total,
     unityValue,
     handleSubmit,
+    maxGeneration,
   }
 }
 

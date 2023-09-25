@@ -1,10 +1,10 @@
-import Button from '@/atoms/button/button'
-import SummaryBox from '@/atoms/summary/summary-box'
-import SummaryConditions from '@/atoms/summary/summary-conditions'
-import SummaryFooter from '@/atoms/summary/summary-footer'
-import SummaryItem from '@/atoms/summary/summary-item'
-import { formatBRL } from '@/utils/format-brl'
-import { numTwoDigits } from '@/utils/num-two-digits'
+import Button from '../../atoms/button/button'
+import SummaryBox from '../../atoms/summary/summary-box'
+import SummaryConditions from '../../atoms/summary/summary-conditions'
+import SummaryFooter from '../../atoms/summary/summary-footer'
+import SummaryItem from '../../atoms/summary/summary-item'
+import { formatBRL } from '../../utils/format-brl'
+import { numTwoDigits } from '../../utils/num-two-digits'
 import useScheduleSummary from './use-schedule-summary-hook'
 
 const ScheduleSummary = () => {

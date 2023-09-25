@@ -6,7 +6,6 @@ export interface SchedulerInterface {
   region: string
   location: string
   pokemons: SelectData[]
-  generations: string[]
   scheduleDate: string
   scheduleTime: string
 }

@@ -6,7 +6,7 @@ type Props = {
 }
 
 const SummaryBox = ({ children }: Props) => {
-  return <SummaryBoxContainer>{children}</SummaryBoxContainer>
+  return <SummaryBoxContainer data-testid='summary'>{children}</SummaryBoxContainer>
 }
 
 export default SummaryBox

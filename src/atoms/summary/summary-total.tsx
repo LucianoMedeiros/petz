@@ -6,7 +6,7 @@ type Props = {
 }
 
 const SummaryTotal = ({ children }: Props) => {
-  return <SummaryTotalContainer>{children}</SummaryTotalContainer>
+  return <SummaryTotalContainer data-testid='summary-total'>{children}</SummaryTotalContainer>
 }
 
 export default SummaryTotal

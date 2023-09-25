@@ -1,4 +1,4 @@
-import { formatBRL } from '@/utils/format-brl'
+import { formatBRL } from '../../utils/format-brl'
 import { ReactNode } from 'react'
 import GridCol from '../grid/grid-col'
 import GridRow from '../grid/grid-row'
