@@ -6,6 +6,7 @@ import { RootState, useAppDispatch, useAppSelector } from '@/store/store-config'
 import { ChangeEvent } from 'react'
 import PokemonView from './pokemon/pokemon-view'
 import { PokemonViewModel } from './pokemon/pokemon-view-model'
+import { emptyItem } from '@/atoms/select/select'
 
 const PokemonList = () => {
   const dispatch = useAppDispatch()
@@ -22,12 +23,20 @@ const PokemonList = () => {
     const viewModel = new PokemonViewModel()
 
     const value = e.target.value
-    const pokemon = e.target.options[e.target.selectedIndex].text
     const index = e.target.getAttribute('data-index')
-    const generation = e.target.getAttribute('generation')
 
+    if (value === '') {
+      dispatch(
+        SchedulerActions.updatePokemon({
+          updatedItem: emptyItem,
+          index,
+        }),
+      )
+      return
+    }
+
+    const pokemon = e.target.options[e.target.selectedIndex].text
     const gen = await viewModel.getGeneration(e.target.value)
-
     dispatch(
       SchedulerActions.updatePokemon({
         updatedItem: {
